@@ -14,6 +14,17 @@ export default defineConfig({
     ['list'],
     ['html', { outputFolder: 'reports/playwright', open: 'never' }],
     ['json', { outputFile: 'reports/playwright/results.json' }],
+    ['allure-playwright', {
+      resultsDir: 'allure-results/api',
+      detail: true,
+      suiteTitle: true,
+      environmentInfo: {
+        Framework: 'Playwright',
+        'API Base URL': 'https://reqres.in',
+        'Node.js': process.version,
+        OS: process.platform,
+      },
+    }],
   ],
 
   use: {

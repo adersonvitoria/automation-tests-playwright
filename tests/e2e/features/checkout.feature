@@ -1,5 +1,6 @@
 # language: pt
 
+@epic:E2E @feature:Checkout @owner:QATeam
 Funcionalidade: Checkout de produtos
   Como um cliente autenticado
   Eu quero finalizar a compra de produtos
@@ -8,6 +9,7 @@ Funcionalidade: Checkout de produtos
   Contexto:
     Dado que estou logado com usuário "standard_user" e senha "secret_sauce"
 
+  @severity:blocker @story:CheckoutCompleto @tag:smoke @tag:regressao
   Cenário: Checkout completo com um único produto
     Quando eu adiciono o primeiro produto ao carrinho
     E navego até o carrinho
@@ -19,6 +21,7 @@ Funcionalidade: Checkout de produtos
     Quando finalizo a compra
     Então devo ver a mensagem de confirmação "Thank you for your order!"
 
+  @severity:critical @story:CheckoutMultiplosProdutos @tag:regressao
   Cenário: Checkout com múltiplos produtos
     Quando eu adiciono 3 produtos ao carrinho
     E navego até o carrinho
@@ -30,6 +33,7 @@ Funcionalidade: Checkout de produtos
     Quando finalizo a compra
     Então devo ver a mensagem de confirmação "Thank you for your order!"
 
+  @severity:critical @story:ValidacaoCheckout @tag:regressao
   Cenário: Checkout sem preencher o primeiro nome
     Quando eu adiciono o primeiro produto ao carrinho
     E navego até o carrinho
@@ -38,6 +42,7 @@ Funcionalidade: Checkout de produtos
     E continuo para a revisão do pedido
     Então devo ver o erro de checkout "Error: First Name is required"
 
+  @severity:critical @story:ValidacaoCheckout @tag:regressao
   Cenário: Checkout sem preencher o sobrenome
     Quando eu adiciono o primeiro produto ao carrinho
     E navego até o carrinho
@@ -46,6 +51,7 @@ Funcionalidade: Checkout de produtos
     E continuo para a revisão do pedido
     Então devo ver o erro de checkout "Error: Last Name is required"
 
+  @severity:critical @story:ValidacaoCheckout @tag:regressao
   Cenário: Checkout sem preencher o CEP
     Quando eu adiciono o primeiro produto ao carrinho
     E navego até o carrinho
@@ -54,6 +60,7 @@ Funcionalidade: Checkout de produtos
     E continuo para a revisão do pedido
     Então devo ver o erro de checkout "Error: Postal Code is required"
 
+  @severity:normal @story:ValidacaoCheckout @tag:regressao
   Cenário: Checkout com todos os campos obrigatórios vazios
     Quando eu adiciono o primeiro produto ao carrinho
     E navego até o carrinho
@@ -61,6 +68,7 @@ Funcionalidade: Checkout de produtos
     E continuo para a revisão do pedido
     Então devo ver o erro de checkout "Error: First Name is required"
 
+  @severity:normal @story:ResumoValores @tag:regressao
   Cenário: Verificar valores no resumo do pedido
     Quando eu adiciono o primeiro produto ao carrinho
     E navego até o carrinho

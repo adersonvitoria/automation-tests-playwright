@@ -8,7 +8,10 @@
     "test:all": "npm run test:api && npm run test:e2e",
     "report:api": "npx playwright show-report reports/playwright",
     "report:e2e": "node scripts/generate-cucumber-report.js",
-    "report:all": "npm run report:api && npm run report:e2e"
+    "report:all": "npm run report:api && npm run report:e2e",
+    "allure:generate": "npx allure generate allure-results -o allure-report --clean",
+    "allure:open": "npx allure open allure-report",
+    "allure:serve": "npx allure serve allure-results"
   },
   "keywords": [
     "playwright",
@@ -24,6 +27,10 @@
     "@cucumber/cucumber": "^12.7.0",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.3.2",
+    "allure-commandline": "^2.37.0",
+    "allure-cucumberjs": "^3.5.0",
+    "allure-js-commons": "^3.5.0",
+    "allure-playwright": "^3.5.0",
     "multiple-cucumber-html-reporter": "^3.10.0",
     "playwright": "^1.58.2",
     "tsx": "^4.21.0",

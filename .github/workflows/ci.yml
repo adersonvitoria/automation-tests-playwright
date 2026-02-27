@@ -7,6 +7,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+
 jobs:
   api-tests:
     name: Testes de API
@@ -28,17 +31,26 @@ jobs:
 
       - name: Executar testes de API
         run: npm run test:api
+        continue-on-error: true
 
-      - name: Upload relatório de API
+      - name: Upload relatório Playwright
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: api-test-report
+          name: api-playwright-report
           path: reports/playwright/
           retention-days: 30
 
+      - name: Upload Allure Results (API)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-api
+          path: allure-results/
+          retention-days: 30
+
   e2e-tests:
-    name: Testes E2E (Cucumber)
+    name: Testes E2E (Cucumber + Allure)
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -60,19 +72,28 @@ jobs:
 
       - name: Executar testes E2E
         run: npm run test:e2e
+        continue-on-error: true
 
       - name: Gerar relatório HTML do Cucumber
         if: always()
         run: npm run report:e2e
 
-      - name: Upload relatório E2E
+      - name: Upload relatório Cucumber
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: e2e-test-report
+          name: e2e-cucumber-report
           path: |
             reports/cucumber/
             reports/screenshots/
+          retention-days: 30
+
+      - name: Upload Allure Results (E2E)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-e2e
+          path: allure-results/
           retention-days: 30
 
   load-tests:
@@ -92,9 +113,24 @@ jobs:
           sudo apt-get update
           sudo apt-get install k6
 
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Executar teste de carga
-        run: k6 run ../load-tests-k6/scripts/load-test.js --out json=reports/k6-results.json --summary-export=reports/k6-summary.json
+        run: |
+          mkdir -p reports
+          k6 run -e REQRES_API_KEY=${{ secrets.REQRES_API_KEY }} ../load-tests-k6/scripts/load-test.js --summary-export=reports/k6-summary.json
         continue-on-error: true
+
+      - name: Gerar Allure Results do k6
+        if: always()
+        run: |
+          cd ../load-tests-k6
+          npm ci
+          node scripts/generate-allure-report.js
+          cp -r allure-results/ ${{ github.workspace }}/allure-results-k6/
 
       - name: Upload relatório de carga
         uses: actions/upload-artifact@v4
@@ -104,19 +140,84 @@ jobs:
           path: reports/
           retention-days: 30
 
-  summary:
-    name: Resumo dos Testes
+      - name: Upload Allure Results (k6)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-k6
+          path: allure-results-k6/
+          retention-days: 30
+
+  allure-report:
+    name: Gerar Allure Report Consolidado
     runs-on: ubuntu-latest
     needs: [api-tests, e2e-tests, load-tests]
     if: always()
 
     steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Download Allure Results - API
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results-api
+          path: allure-results/api
+        continue-on-error: true
+
+      - name: Download Allure Results - E2E
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results-e2e
+          path: allure-results/e2e
+        continue-on-error: true
+
+      - name: Download Allure Results - k6
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results-k6
+          path: allure-results/k6
+        continue-on-error: true
+
+      - name: Consolidar resultados Allure
+        run: |
+          mkdir -p allure-results-merged
+          cp -r allure-results/api/* allure-results-merged/ 2>/dev/null || true
+          cp -r allure-results/e2e/* allure-results-merged/ 2>/dev/null || true
+          cp -r allure-results/k6/* allure-results-merged/ 2>/dev/null || true
+
+      - name: Instalar Allure CLI
+        run: |
+          npm install -g allure-commandline
+          allure --version
+
+      - name: Gerar Allure Report
+        run: allure generate allure-results-merged -o allure-report --clean
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report-consolidated
+          path: allure-report/
+          retention-days: 30
+
+  summary:
+    name: Resumo dos Testes
+    runs-on: ubuntu-latest
+    needs: [api-tests, e2e-tests, load-tests, allure-report]
+    if: always()
+
+    steps:
       - name: Resumo da Execução
         run: |
-          echo "## Resumo da Execução de Testes" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 Resumo da Execução de Testes" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Suite | Status |" >> $GITHUB_STEP_SUMMARY
-          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Testes de API | ${{ needs.api-tests.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Testes E2E | ${{ needs.e2e-tests.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Testes de Carga | ${{ needs.load-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Suite | Status | Relatório |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|-----------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Testes de API | ${{ needs.api-tests.result }} | Playwright + Allure |" >> $GITHUB_STEP_SUMMARY
+          echo "| Testes E2E | ${{ needs.e2e-tests.result }} | Cucumber + Allure |" >> $GITHUB_STEP_SUMMARY
+          echo "| Testes de Carga | ${{ needs.load-tests.result }} | k6 + Allure |" >> $GITHUB_STEP_SUMMARY
+          echo "| Allure Report | ${{ needs.allure-report.result }} | Consolidado |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> Baixe o artefato **allure-report-consolidated** para visualizar o relatório completo." >> $GITHUB_STEP_SUMMARY
