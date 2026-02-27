@@ -1,0 +1,35 @@
+{
+  "name": "automation-tests-playwright",
+  "version": "1.0.0",
+  "description": "Projeto de automação de testes com Playwright (API + E2E) e Cucumber BDD",
+  "scripts": {
+    "test:api": "npx playwright test --project=api-tests",
+    "test:e2e": "npx cucumber-js",
+    "test:all": "npm run test:api && npm run test:e2e",
+    "report:api": "npx playwright show-report reports/playwright",
+    "report:e2e": "node scripts/generate-cucumber-report.js",
+    "report:all": "npm run report:api && npm run report:e2e"
+  },
+  "keywords": [
+    "playwright",
+    "cucumber",
+    "automation",
+    "testing",
+    "api",
+    "e2e"
+  ],
+  "author": "Aderson Rosa",
+  "license": "MIT",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.7.0",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.3.2",
+    "multiple-cucumber-html-reporter": "^3.10.0",
+    "playwright": "^1.58.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
