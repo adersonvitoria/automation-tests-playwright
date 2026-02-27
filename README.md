@@ -90,7 +90,7 @@ npx playwright install --with-deps chromium
 
 # Configurar API key do Reqres.in
 cp .env.example .env
-# Editar .env e adicionar sua API key (obtenha em: https://app.reqres.in/?next=/api-keys)
+# A key já está configurada no .env.example (REQRES_API_KEY=reqres_7b4880206ffa4e6b8429a7291998c7c5)
 ```
 
 > **Importante**: A API Reqres.in requer uma chave de API gratuita. Crie sua conta em [app.reqres.in](https://app.reqres.in) e gere uma key para incluir no arquivo `.env`.
