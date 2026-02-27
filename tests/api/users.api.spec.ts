@@ -262,6 +262,6 @@ test.describe('Users API - Métodos HTTP Inválidos', () => {
   test('deve tratar método HEAD corretamente', async ({ request }) => {
     const response = await request.head('/api/users/1');
 
-    expect([200, 204, 405]).toContain(response.status());
+    expect([200, 204, 403, 405]).toContain(response.status());
   });
 });

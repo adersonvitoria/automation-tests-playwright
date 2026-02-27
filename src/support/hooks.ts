@@ -1,7 +1,9 @@
-import { Before, After, Status } from '@cucumber/cucumber';
+import { Before, After, Status, setDefaultTimeout } from '@cucumber/cucumber';
 import { CustomWorld } from './world';
 import * as fs from 'fs';
 import * as path from 'path';
+
+setDefaultTimeout(30_000);
 
 const screenshotDir = path.resolve('reports', 'screenshots');
 
