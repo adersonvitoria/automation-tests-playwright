@@ -7,6 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+
 env:
   REQRES_API_KEY: reqres_7b4880206ffa4e6b8429a7291998c7c5
 
@@ -142,6 +146,14 @@ jobs:
           path: allure-report/
           retention-days: 30
 
+      - name: Publicar Allure Report no GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: allure-report
+
   summary:
     name: Resumo dos Testes
     runs-on: ubuntu-latest
@@ -159,4 +171,4 @@ jobs:
           echo "| Testes E2E | ${{ needs.e2e-tests.result }} | Cucumber + Allure |" >> $GITHUB_STEP_SUMMARY
           echo "| Allure Report | ${{ needs.allure-report.result }} | Consolidado |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> Baixe o artefato **allure-report-consolidated** para visualizar o relatório completo." >> $GITHUB_STEP_SUMMARY
+          echo "> **Allure Report:** https://adersonvitoria.github.io/automation-tests-playwright/allure-report/" >> $GITHUB_STEP_SUMMARY
