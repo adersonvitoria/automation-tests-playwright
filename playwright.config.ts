@@ -8,14 +8,15 @@ export default defineConfig({
   testMatch: '**/*.api.spec.ts',
   timeout: 30_000,
   retries: 1,
-  workers: 4,
+  workers: 1,
+  fullyParallel: false,
 
   reporter: [
     ['list'],
     ['html', { outputFolder: 'reports/playwright', open: 'never' }],
     ['json', { outputFile: 'reports/playwright/results.json' }],
     ['allure-playwright', {
-      resultsDir: 'allure-results/api',
+      resultsDir: 'allure-results',
       detail: true,
       suiteTitle: true,
       environmentInfo: {
