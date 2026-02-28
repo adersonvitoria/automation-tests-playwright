@@ -6,8 +6,8 @@ test.describe('Users API - GET /api/users', () => {
   test.describe('Cenários Positivos', () => {
 
     test('deve listar usuários com paginação (página 1)', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Listagem de Usuários');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Listar usuários com paginação');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -51,8 +51,8 @@ test.describe('Users API - GET /api/users', () => {
     });
 
     test('deve listar usuários da página 2', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Listagem de Usuários');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Listar usuários com paginação');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -80,8 +80,8 @@ test.describe('Users API - GET /api/users', () => {
     });
 
     test('deve retornar um único usuário por ID', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Busca de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Buscar usuário por ID');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -114,8 +114,8 @@ test.describe('Users API - GET /api/users', () => {
     });
 
     test('deve validar schema completo do usuário', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Validação de Schema');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Schema do objeto usuário');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -148,8 +148,8 @@ test.describe('Users API - GET /api/users', () => {
   test.describe('Cenários Negativos', () => {
 
     test('deve retornar 404 para usuário inexistente', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Busca de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Buscar usuário inexistente');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -173,8 +173,8 @@ test.describe('Users API - GET /api/users', () => {
     });
 
     test('deve retornar resposta vazia para página sem dados', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Listagem de Usuários');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Página sem dados');
       await allure.severity('minor');
       await allure.owner('QA Team');
@@ -201,8 +201,8 @@ test.describe('Users API - POST /api/users', () => {
   test.describe('Cenários Positivos', () => {
 
     test('deve criar um novo usuário com dados válidos', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Criação de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Criar usuário com payload válido');
       await allure.severity('blocker');
       await allure.owner('QA Team');
@@ -233,8 +233,8 @@ test.describe('Users API - POST /api/users', () => {
     });
 
     test('deve criar usuário com campos extras', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Criação de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Criar usuário com campos adicionais');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -266,8 +266,8 @@ test.describe('Users API - POST /api/users', () => {
   test.describe('Cenários Negativos', () => {
 
     test('deve aceitar payload vazio (API permissiva)', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Criação de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Payload vazio');
       await allure.severity('minor');
       await allure.owner('QA Team');
@@ -289,8 +289,8 @@ test.describe('Users API - POST /api/users', () => {
     });
 
     test('deve validar resposta com payload malformado (string)', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Criação de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Payload malformado');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -319,8 +319,8 @@ test.describe('Users API - PUT /api/users', () => {
   test.describe('Cenários Positivos', () => {
 
     test('deve atualizar usuário existente completamente', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Atualização de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Atualização completa via PUT');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -350,8 +350,8 @@ test.describe('Users API - PUT /api/users', () => {
     });
 
     test('deve atualizar apenas um campo via PUT', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Atualização de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Atualização parcial via PUT');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -378,8 +378,8 @@ test.describe('Users API - PUT /api/users', () => {
   test.describe('Cenários Negativos', () => {
 
     test('deve tratar PUT com payload vazio', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Atualização de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('PUT com payload vazio');
       await allure.severity('minor');
       await allure.owner('QA Team');
@@ -400,8 +400,8 @@ test.describe('Users API - PUT /api/users', () => {
     });
 
     test('deve tratar PUT para ID inexistente (API mock)', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Atualização de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('PUT para ID inexistente');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -427,8 +427,8 @@ test.describe('Users API - PUT /api/users', () => {
 test.describe('Users API - PATCH /api/users', () => {
 
   test('deve atualizar parcialmente um usuário', async ({ request }) => {
-    await allure.epic('Users API');
-    await allure.feature('Atualização Parcial');
+    await allure.epic('API');
+    await allure.feature('Users');
     await allure.story('PATCH para atualizar campo específico');
     await allure.severity('critical');
     await allure.owner('QA Team');
@@ -458,8 +458,8 @@ test.describe('Users API - DELETE /api/users', () => {
   test.describe('Cenários Positivos', () => {
 
     test('deve deletar usuário existente com sucesso', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Exclusão de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Deletar usuário existente');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -485,8 +485,8 @@ test.describe('Users API - DELETE /api/users', () => {
   test.describe('Cenários Negativos', () => {
 
     test('deve tratar DELETE para ID inexistente', async ({ request }) => {
-      await allure.epic('Users API');
-      await allure.feature('Exclusão de Usuário');
+      await allure.epic('API');
+      await allure.feature('Users');
       await allure.story('Deletar ID inexistente');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -510,8 +510,8 @@ test.describe('Users API - DELETE /api/users', () => {
 test.describe('Users API - Validação de Headers', () => {
 
   test('deve retornar headers obrigatórios na resposta', async ({ request }) => {
-    await allure.epic('Users API');
-    await allure.feature('Validação de Headers');
+    await allure.epic('API');
+    await allure.feature('Users');
     await allure.story('Headers obrigatórios na resposta');
     await allure.severity('normal');
     await allure.owner('QA Team');
@@ -531,8 +531,8 @@ test.describe('Users API - Validação de Headers', () => {
   });
 
   test('deve aceitar requisição com Accept header customizado', async ({ request }) => {
-    await allure.epic('Users API');
-    await allure.feature('Validação de Headers');
+    await allure.epic('API');
+    await allure.feature('Users');
     await allure.story('Accept header customizado');
     await allure.severity('minor');
     await allure.owner('QA Team');
@@ -557,8 +557,8 @@ test.describe('Users API - Validação de Headers', () => {
 test.describe('Users API - Métodos HTTP Inválidos', () => {
 
   test('deve tratar método HEAD corretamente', async ({ request }) => {
-    await allure.epic('Users API');
-    await allure.feature('Métodos HTTP');
+    await allure.epic('API');
+    await allure.feature('Users');
     await allure.story('Método HEAD');
     await allure.severity('minor');
     await allure.owner('QA Team');

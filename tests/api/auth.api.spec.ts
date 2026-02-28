@@ -6,8 +6,8 @@ test.describe('Auth API - POST /api/register', () => {
   test.describe('Cenários Positivos', () => {
 
     test('deve registrar usuário com credenciais válidas', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Registro de Usuário');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Registro com credenciais válidas');
       await allure.severity('blocker');
       await allure.owner('QA Team');
@@ -48,8 +48,8 @@ test.describe('Auth API - POST /api/register', () => {
   test.describe('Cenários Negativos', () => {
 
     test('deve rejeitar registro sem senha', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Registro de Usuário');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Registro sem senha');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -76,8 +76,8 @@ test.describe('Auth API - POST /api/register', () => {
     });
 
     test('deve rejeitar registro sem email', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Registro de Usuário');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Registro sem email');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -101,8 +101,8 @@ test.describe('Auth API - POST /api/register', () => {
     });
 
     test('deve rejeitar registro com payload vazio', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Registro de Usuário');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Registro com payload vazio');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -123,8 +123,8 @@ test.describe('Auth API - POST /api/register', () => {
     });
 
     test('deve rejeitar registro com email não cadastrado na base', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Registro de Usuário');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Registro com email não cadastrado');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -150,8 +150,8 @@ test.describe('Auth API - POST /api/register', () => {
     });
 
     test('deve rejeitar registro com email inválido', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Registro de Usuário');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Registro com email inválido');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -183,8 +183,8 @@ test.describe('Auth API - POST /api/login', () => {
   test.describe('Cenários Positivos', () => {
 
     test('deve autenticar com credenciais válidas', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Login');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Login com credenciais válidas');
       await allure.severity('blocker');
       await allure.owner('QA Team');
@@ -220,8 +220,8 @@ test.describe('Auth API - POST /api/login', () => {
   test.describe('Cenários Negativos', () => {
 
     test('deve rejeitar login sem senha', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Login');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Login sem senha');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -244,8 +244,8 @@ test.describe('Auth API - POST /api/login', () => {
     });
 
     test('deve rejeitar login sem email', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Login');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Login sem email');
       await allure.severity('critical');
       await allure.owner('QA Team');
@@ -268,8 +268,8 @@ test.describe('Auth API - POST /api/login', () => {
     });
 
     test('deve rejeitar login com payload vazio', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Login');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Login com payload vazio');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -290,8 +290,8 @@ test.describe('Auth API - POST /api/login', () => {
     });
 
     test('deve rejeitar login com email não cadastrado', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Login');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Login com email não cadastrado');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -317,8 +317,8 @@ test.describe('Auth API - POST /api/login', () => {
     });
 
     test('deve rejeitar login com campos nulos', async ({ request }) => {
-      await allure.epic('Auth API');
-      await allure.feature('Login');
+      await allure.epic('API');
+      await allure.feature('Auth');
       await allure.story('Login com campos nulos');
       await allure.severity('normal');
       await allure.owner('QA Team');
@@ -345,8 +345,8 @@ test.describe('Auth API - POST /api/login', () => {
 test.describe('Auth API - Validações de Segurança', () => {
 
   test('não deve expor dados sensíveis no registro bem-sucedido', async ({ request }) => {
-    await allure.epic('Auth API');
-    await allure.feature('Segurança');
+    await allure.epic('API');
+    await allure.feature('Auth');
     await allure.story('Proteção de dados sensíveis no registro');
     await allure.severity('critical');
     await allure.owner('QA Team');
@@ -377,8 +377,8 @@ test.describe('Auth API - Validações de Segurança', () => {
   });
 
   test('não deve expor dados sensíveis no login bem-sucedido', async ({ request }) => {
-    await allure.epic('Auth API');
-    await allure.feature('Segurança');
+    await allure.epic('API');
+    await allure.feature('Auth');
     await allure.story('Proteção de dados sensíveis no login');
     await allure.severity('critical');
     await allure.owner('QA Team');
@@ -412,8 +412,8 @@ test.describe('Auth API - Validações de Segurança', () => {
 test.describe('Resources API - GET /api/unknown', () => {
 
   test('deve listar recursos com estrutura correta', async ({ request }) => {
-    await allure.epic('Resources API');
-    await allure.feature('Listagem de Recursos');
+    await allure.epic('API');
+    await allure.feature('Resources');
     await allure.story('Listar recursos com schema correto');
     await allure.severity('normal');
     await allure.owner('QA Team');
@@ -449,8 +449,8 @@ test.describe('Resources API - GET /api/unknown', () => {
   });
 
   test('deve retornar recurso único por ID', async ({ request }) => {
-    await allure.epic('Resources API');
-    await allure.feature('Busca de Recurso');
+    await allure.epic('API');
+    await allure.feature('Resources');
     await allure.story('Buscar recurso por ID');
     await allure.severity('normal');
     await allure.owner('QA Team');
@@ -472,8 +472,8 @@ test.describe('Resources API - GET /api/unknown', () => {
   });
 
   test('deve retornar 404 para recurso inexistente', async ({ request }) => {
-    await allure.epic('Resources API');
-    await allure.feature('Busca de Recurso');
+    await allure.epic('API');
+    await allure.feature('Resources');
     await allure.story('Buscar recurso inexistente');
     await allure.severity('minor');
     await allure.owner('QA Team');
@@ -495,8 +495,8 @@ test.describe('Resources API - GET /api/unknown', () => {
 test.describe('API - Delayed Response', () => {
 
   test('deve lidar com resposta com delay de 3 segundos', async ({ request }) => {
-    await allure.epic('API Performance');
-    await allure.feature('Resposta com Delay');
+    await allure.epic('API');
+    await allure.feature('Performance');
     await allure.story('Timeout e delay de resposta');
     await allure.severity('normal');
     await allure.owner('QA Team');
