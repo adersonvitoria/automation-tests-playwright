@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+  REQRES_API_KEY: reqres_7b4880206ffa4e6b8429a7291998c7c5
 
 jobs:
   api-tests:
