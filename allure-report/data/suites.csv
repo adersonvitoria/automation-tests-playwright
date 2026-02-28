@@ -1,81 +1,81 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Como um cliente autenticado
-  Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","627","Checkout com todos os campos obrigatórios vazios","","2026-02-28","passed","2026-02-28","","","",""
+"Verifica se a API rejeita registro quando o payload está completamente vazio ({}).","146","deve rejeitar registro com payload vazio","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
 "Como um usuário do SauceDemo
   Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","382","Login com campos vazios","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica o comportamento da API mock ao enviar PUT para um ID inexistente (99999). A API reqres.in retorna 200 mesmo para IDs inexistentes por ser uma API de mock.","184","deve tratar PUT para ID inexistente (API mock)","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Negativos","users.api.spec.ts","",""
+  Para acessar o catálogo de produtos","455","Login com credenciais válidas","","2026-02-28","passed","2026-02-28","","","",""
+"Verifica o comportamento da API ao tentar deletar um usuário com ID inexistente (99999). A API reqres.in retorna 204 por ser uma API mock.","144","deve tratar DELETE para ID inexistente","api-tests","2026-02-28","passed","2026-02-28","Users API - DELETE /api/users > Cenários Negativos","users.api.spec.ts","",""
+"Verifica se a API retorna corretamente um recurso específico por ID com campos id e name.","265","deve retornar recurso único por ID","api-tests","2026-02-28","passed","2026-02-28","Resources API - GET /api/unknown","auth.api.spec.ts","",""
 "Como um cliente autenticado
   Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","805","Checkout com múltiplos produtos","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a API retorna os dados completos de um usuário específico por ID, incluindo id, email, first_name, last_name, avatar e bloco support.","191","deve retornar um único usuário por ID","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
-"Verifica se a API retorna ""user not found"" ao tentar login com email não registrado na base.","100","deve rejeitar login com email não cadastrado","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
-"Verifica se a API retorna status 404 e body vazio ao buscar um usuário com ID inexistente (9999).","191","deve retornar 404 para usuário inexistente","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Negativos","users.api.spec.ts","",""
-"Validação de segurança: verifica que a API NÃO retorna a senha do usuário no body da resposta de login bem-sucedido, prevenindo vazamento de dados sensíveis.","102","não deve expor dados sensíveis no login bem-sucedido","api-tests","2026-02-28","passed","2026-02-28","Auth API - Validações de Segurança","auth.api.spec.ts","",""
-"Verifica como a API trata requisições HEAD. Aceita status 200, 204, 403 ou 405 como respostas válidas.","15","deve tratar método HEAD corretamente","api-tests","2026-02-28","passed","2026-02-28","Users API - Métodos HTTP Inválidos","users.api.spec.ts","",""
-"Verifica se a API retorna status 404 ao buscar um recurso com ID inexistente (23).","190","deve retornar 404 para recurso inexistente","api-tests","2026-02-28","passed","2026-02-28","Resources API - GET /api/unknown","auth.api.spec.ts","",""
-"Verifica o comportamento da API ao tentar deletar um usuário com ID inexistente (99999). A API reqres.in retorna 204 por ser uma API mock.","102","deve tratar DELETE para ID inexistente","api-tests","2026-02-28","passed","2026-02-28","Users API - DELETE /api/users > Cenários Negativos","users.api.spec.ts","",""
-"Verifica se a API rejeita registro quando o campo password não é enviado. Espera-se status 400 com mensagem de erro ""Missing password"".","112","deve rejeitar registro sem senha","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
-"Como um usuário do SauceDemo
-  Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","404","Login com usuário bloqueado","","2026-02-28","passed","2026-02-28","","","",""
-"Como um usuário do SauceDemo
-  Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","441","Login com credenciais válidas","","2026-02-28","passed","2026-02-28","","","",""
-"Validação de segurança: verifica que a API NÃO retorna a senha do usuário no body da resposta de registro bem-sucedido, prevenindo vazamento de dados sensíveis.","104","não deve expor dados sensíveis no registro bem-sucedido","api-tests","2026-02-28","passed","2026-02-28","Auth API - Validações de Segurança","auth.api.spec.ts","",""
-"Como um usuário do SauceDemo
-  Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","449","Navegação após login válido","","2026-02-28","passed","2026-02-28","","","",""
-"Como um usuário do SauceDemo
-  Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","397","Login com senha em branco","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica o comportamento da API ao receber um payload malformado (string em vez de JSON), com Content-Type text/plain. Aceita status 200, 201, 400 ou 415.","101","deve validar resposta com payload malformado (string)","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Negativos","users.api.spec.ts","",""
+  Para completar minha experiência de compra","613","Checkout com todos os campos obrigatórios vazios","","2026-02-28","passed","2026-02-28","","","",""
+"Validação de segurança: verifica que a API NÃO retorna a senha do usuário no body da resposta de registro bem-sucedido, prevenindo vazamento de dados sensíveis.","153","não deve expor dados sensíveis no registro bem-sucedido","api-tests","2026-02-28","passed","2026-02-28","Auth API - Validações de Segurança","auth.api.spec.ts","",""
+"Verifica se a API rejeita registro quando o email não está na base de dados permitida do reqres.in.","147","deve rejeitar registro com email não cadastrado na base","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API rejeita registro quando o email possui formato inválido (sem @ e domínio).","149","deve rejeitar registro com email inválido","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API retorna a lista de recursos (cores Pantone) com schema correto: id, name, year, color e pantone_value.","278","deve listar recursos com estrutura correta","api-tests","2026-02-28","passed","2026-02-28","Resources API - GET /api/unknown","auth.api.spec.ts","",""
+"Verifica se a API aceita atualização via PUT enviando apenas o campo name.","147","deve atualizar apenas um campo via PUT","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica o comportamento da API mock ao enviar PUT para um ID inexistente (99999). A API reqres.in retorna 200 mesmo para IDs inexistentes por ser uma API de mock.","255","deve tratar PUT para ID inexistente (API mock)","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Negativos","users.api.spec.ts","",""
 "Como um cliente autenticado
   Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","629","Checkout sem preencher o CEP","","2026-02-28","passed","2026-02-28","","","",""
-"Valida os tipos de dados de todos os campos do objeto usuário: id (number), email (string com formato válido), first_name (string), last_name (string), avatar (string).","192","deve validar schema completo do usuário","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
-"Verifica se a API rejeita registro quando o campo email não é enviado. Espera-se status 400 com mensagem ""Missing email or username"".","106","deve rejeitar registro sem email","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
-"Verifica se a API retorna corretamente um recurso específico por ID com campos id e name.","189","deve retornar recurso único por ID","api-tests","2026-02-28","passed","2026-02-28","Resources API - GET /api/unknown","auth.api.spec.ts","",""
-"Verifica se a API retorna a lista de usuários da página 1 com a estrutura correta de paginação, incluindo campos page, per_page, total, total_pages e array de dados com propriedades id, email, first_name, last_name e avatar.","206","deve listar usuários com paginação (página 1)","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
+  Para completar minha experiência de compra","674","Verificar valores no resumo do pedido","","2026-02-28","passed","2026-02-28","","","",""
+"Verifica se a API rejeita registro quando o campo password não é enviado. Espera-se status 400 com mensagem de erro ""Missing password"".","156","deve rejeitar registro sem senha","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API retorna corretamente a segunda página de usuários, validando que o campo page é 2 e que o array de dados não está vazio.","263","deve listar usuários da página 2","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica se a API processa corretamente requisições com header Accept: application/json customizado.","149","deve aceitar requisição com Accept header customizado","api-tests","2026-02-28","passed","2026-02-28","Users API - Validação de Headers","users.api.spec.ts","",""
+"Verifica se a API aceita campos adicionais (email, department) além de name e job no payload de criação.","146","deve criar usuário com campos extras","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Positivos","users.api.spec.ts","",""
 "Como um usuário do SauceDemo
   Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","431","Login com usuário inexistente","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a API atualiza corretamente todos os campos de um usuário via PUT, retornando status 200 com os dados atualizados e timestamp updatedAt.","108","deve atualizar usuário existente completamente","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Positivos","users.api.spec.ts","",""
-"Verifica se a API rejeita registro quando o email não está na base de dados permitida do reqres.in.","101","deve rejeitar registro com email não cadastrado na base","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
-"Verifica se a API aceita atualização via PUT enviando apenas o campo name.","104","deve atualizar apenas um campo via PUT","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Positivos","users.api.spec.ts","",""
-"Verifica se a API retorna corretamente a segunda página de usuários, validando que o campo page é 2 e que o array de dados não está vazio.","193","deve listar usuários da página 2","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
+  Para acessar o catálogo de produtos","414","Login com usuário inexistente","","2026-02-28","passed","2026-02-28","","","",""
 "Como um usuário do SauceDemo
   Eu quero fazer login na aplicação
-  Para acessar o catálogo de produtos","424","Login com senha incorreta","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a API rejeita login quando o payload está completamente vazio ({}).","102","deve rejeitar login com payload vazio","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
-"Verifica se a API deleta corretamente um usuário existente, retornando status 204 No Content com body vazio.","98","deve deletar usuário existente com sucesso","api-tests","2026-02-28","passed","2026-02-28","Users API - DELETE /api/users > Cenários Positivos","users.api.spec.ts","",""
-"Verifica se a API retorna a lista de recursos (cores Pantone) com schema correto: id, name, year, color e pantone_value.","204","deve listar recursos com estrutura correta","api-tests","2026-02-28","passed","2026-02-28","Resources API - GET /api/unknown","auth.api.spec.ts","",""
-"Verifica se a API rejeita login sem o campo password, retornando 400 com ""Missing password"".","100","deve rejeitar login sem senha","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
-"Verifica se a API consegue retornar dados corretamente mesmo com um delay forçado de 3 segundos, validando que o tempo de resposta real é >= 2.5s e que os dados retornados são válidos.","3105","deve lidar com resposta com delay de 3 segundos","api-tests","2026-02-28","passed","2026-02-28","API - Delayed Response","auth.api.spec.ts","",""
-"Verifica se a API retorna status 200 com array de dados vazio ao acessar uma página inexistente (999).","188","deve retornar resposta vazia para página sem dados","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Negativos","users.api.spec.ts","",""
-"Verifica se a API aceita campos adicionais (email, department) além de name e job no payload de criação.","100","deve criar usuário com campos extras","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Positivos","users.api.spec.ts","",""
-"Verifica se a API rejeita login sem o campo email, retornando 400 com ""Missing email or username"".","102","deve rejeitar login sem email","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
-"Fluxo completo de registro: enviar email e senha válidos para /api/register. Espera-se status 200 com retorno de id (number) e token (string) no body.","317","deve registrar usuário com credenciais válidas","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Positivos","auth.api.spec.ts","",""
-"Verifica se a API rejeita login quando email e password são enviados como null.","100","deve rejeitar login com campos nulos","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
+  Para acessar o catálogo de produtos","368","Login com campos vazios","","2026-02-28","passed","2026-02-28","","","",""
+"Como um usuário do SauceDemo
+  Eu quero fazer login na aplicação
+  Para acessar o catálogo de produtos","392","Login com senha em branco","","2026-02-28","passed","2026-02-28","","","",""
 "Como um cliente autenticado
   Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","787","Verificar valores no resumo do pedido","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a API processa corretamente requisições com header Accept: application/json customizado.","104","deve aceitar requisição com Accept header customizado","api-tests","2026-02-28","passed","2026-02-28","Users API - Validação de Headers","users.api.spec.ts","",""
-"Verifica se a API cria corretamente um novo usuário com name e job, retornando status 201 e body com os dados enviados mais id e createdAt.","105","deve criar um novo usuário com dados válidos","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Positivos","users.api.spec.ts","",""
+  Para completar minha experiência de compra","630","Checkout sem preencher o primeiro nome","","2026-02-28","passed","2026-02-28","","","",""
 "Como um cliente autenticado
   Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","1931","Checkout completo com um único produto","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a resposta da API contém os headers HTTP obrigatórios, incluindo Content-Type application/json.","108","deve retornar headers obrigatórios na resposta","api-tests","2026-02-28","passed","2026-02-28","Users API - Validação de Headers","users.api.spec.ts","",""
-"Verifica se a API rejeita registro quando o email possui formato inválido (sem @ e domínio).","99","deve rejeitar registro com email inválido","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
-"Verifica o comportamento da API ao enviar PUT com payload vazio. Deve retornar 200 com updatedAt.","101","deve tratar PUT com payload vazio","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Negativos","users.api.spec.ts","",""
-"Fluxo completo de login: enviar email e senha válidos para /api/login. Espera-se status 200 com retorno de token (string não vazia) no body.","107","deve autenticar com credenciais válidas","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Positivos","auth.api.spec.ts","",""
-"Verifica o comportamento da API ao receber payload vazio. A API é permissiva e retorna 201 mesmo sem dados.","100","deve aceitar payload vazio (API permissiva)","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Negativos","users.api.spec.ts","",""
+  Para completar minha experiência de compra","792","Checkout com múltiplos produtos","","2026-02-28","passed","2026-02-28","","","",""
+"Fluxo completo de login: enviar email e senha válidos para /api/login. Espera-se status 200 com retorno de token (string não vazia) no body.","150","deve autenticar com credenciais válidas","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Positivos","auth.api.spec.ts","",""
+"Verifica se a API rejeita registro quando o campo email não é enviado. Espera-se status 400 com mensagem ""Missing email or username"".","153","deve rejeitar registro sem email","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
 "Como um cliente autenticado
   Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","636","Checkout sem preencher o sobrenome","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a API rejeita registro quando o payload está completamente vazio ({}).","101","deve rejeitar registro com payload vazio","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Negativos","auth.api.spec.ts","",""
+  Para completar minha experiência de compra","966","Checkout completo com um único produto","","2026-02-28","passed","2026-02-28","","","",""
+"Verifica se a API atualiza parcialmente um usuário via PATCH, enviando apenas o campo job e validando que retorna o dado atualizado com updatedAt.","146","deve atualizar parcialmente um usuário","api-tests","2026-02-28","passed","2026-02-28","Users API - PATCH /api/users","users.api.spec.ts","",""
 "Como um cliente autenticado
   Eu quero finalizar a compra de produtos
-  Para completar minha experiência de compra","633","Checkout sem preencher o primeiro nome","","2026-02-28","passed","2026-02-28","","","",""
-"Verifica se a API atualiza parcialmente um usuário via PATCH, enviando apenas o campo job e validando que retorna o dado atualizado com updatedAt.","100","deve atualizar parcialmente um usuário","api-tests","2026-02-28","passed","2026-02-28","Users API - PATCH /api/users","users.api.spec.ts","",""
+  Para completar minha experiência de compra","648","Checkout sem preencher o CEP","","2026-02-28","passed","2026-02-28","","","",""
+"Verifica se a API rejeita login sem o campo password, retornando 400 com ""Missing password"".","146","deve rejeitar login sem senha","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
+"Valida os tipos de dados de todos os campos do objeto usuário: id (number), email (string com formato válido), first_name (string), last_name (string), avatar (string).","268","deve validar schema completo do usuário","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica o comportamento da API ao enviar PUT com payload vazio. Deve retornar 200 com updatedAt.","161","deve tratar PUT com payload vazio","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Negativos","users.api.spec.ts","",""
+"Verifica como a API trata requisições HEAD. Aceita status 200, 204, 403 ou 405 como respostas válidas.","31","deve tratar método HEAD corretamente","api-tests","2026-02-28","passed","2026-02-28","Users API - Métodos HTTP Inválidos","users.api.spec.ts","",""
+"Verifica se a API retorna a lista de usuários da página 1 com a estrutura correta de paginação, incluindo campos page, per_page, total, total_pages e array de dados com propriedades id, email, first_name, last_name e avatar.","275","deve listar usuários com paginação (página 1)","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica se a API retorna status 404 e body vazio ao buscar um usuário com ID inexistente (9999).","265","deve retornar 404 para usuário inexistente","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Negativos","users.api.spec.ts","",""
+"Verifica se a resposta da API contém os headers HTTP obrigatórios, incluindo Content-Type application/json.","148","deve retornar headers obrigatórios na resposta","api-tests","2026-02-28","passed","2026-02-28","Users API - Validação de Headers","users.api.spec.ts","",""
+"Verifica se a API rejeita login quando o payload está completamente vazio ({}).","147","deve rejeitar login com payload vazio","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API rejeita login sem o campo email, retornando 400 com ""Missing email or username"".","147","deve rejeitar login sem email","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API consegue retornar dados corretamente mesmo com um delay forçado de 3 segundos, validando que o tempo de resposta real é >= 2.5s e que os dados retornados são válidos.","3153","deve lidar com resposta com delay de 3 segundos","api-tests","2026-02-28","passed","2026-02-28","API - Delayed Response","auth.api.spec.ts","",""
+"Verifica se a API rejeita login quando email e password são enviados como null.","150","deve rejeitar login com campos nulos","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API retorna status 404 ao buscar um recurso com ID inexistente (23).","269","deve retornar 404 para recurso inexistente","api-tests","2026-02-28","passed","2026-02-28","Resources API - GET /api/unknown","auth.api.spec.ts","",""
+"Como um cliente autenticado
+  Eu quero finalizar a compra de produtos
+  Para completar minha experiência de compra","706","Checkout sem preencher o sobrenome","","2026-02-28","passed","2026-02-28","","","",""
+"Fluxo completo de registro: enviar email e senha válidos para /api/register. Espera-se status 200 com retorno de id (number) e token (string) no body.","442","deve registrar usuário com credenciais válidas","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/register > Cenários Positivos","auth.api.spec.ts","",""
+"Como um usuário do SauceDemo
+  Eu quero fazer login na aplicação
+  Para acessar o catálogo de produtos","445","Navegação após login válido","","2026-02-28","passed","2026-02-28","","","",""
+"Como um usuário do SauceDemo
+  Eu quero fazer login na aplicação
+  Para acessar o catálogo de produtos","416","Login com senha incorreta","","2026-02-28","passed","2026-02-28","","","",""
+"Verifica se a API atualiza corretamente todos os campos de um usuário via PUT, retornando status 200 com os dados atualizados e timestamp updatedAt.","150","deve atualizar usuário existente completamente","api-tests","2026-02-28","passed","2026-02-28","Users API - PUT /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica se a API deleta corretamente um usuário existente, retornando status 204 No Content com body vazio.","143","deve deletar usuário existente com sucesso","api-tests","2026-02-28","passed","2026-02-28","Users API - DELETE /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica o comportamento da API ao receber payload vazio. A API é permissiva e retorna 201 mesmo sem dados.","146","deve aceitar payload vazio (API permissiva)","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Negativos","users.api.spec.ts","",""
+"Verifica se a API cria corretamente um novo usuário com name e job, retornando status 201 e body com os dados enviados mais id e createdAt.","148","deve criar um novo usuário com dados válidos","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Verifica o comportamento da API ao receber um payload malformado (string em vez de JSON), com Content-Type text/plain. Aceita status 200, 201, 400 ou 415.","143","deve validar resposta com payload malformado (string)","api-tests","2026-02-28","passed","2026-02-28","Users API - POST /api/users > Cenários Negativos","users.api.spec.ts","",""
+"Verifica se a API retorna os dados completos de um usuário específico por ID, incluindo id, email, first_name, last_name, avatar e bloco support.","268","deve retornar um único usuário por ID","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Positivos","users.api.spec.ts","",""
+"Validação de segurança: verifica que a API NÃO retorna a senha do usuário no body da resposta de login bem-sucedido, prevenindo vazamento de dados sensíveis.","152","não deve expor dados sensíveis no login bem-sucedido","api-tests","2026-02-28","passed","2026-02-28","Auth API - Validações de Segurança","auth.api.spec.ts","",""
+"Verifica se a API retorna ""user not found"" ao tentar login com email não registrado na base.","147","deve rejeitar login com email não cadastrado","api-tests","2026-02-28","passed","2026-02-28","Auth API - POST /api/login > Cenários Negativos","auth.api.spec.ts","",""
+"Verifica se a API retorna status 200 com array de dados vazio ao acessar uma página inexistente (999).","269","deve retornar resposta vazia para página sem dados","api-tests","2026-02-28","passed","2026-02-28","Users API - GET /api/users > Cenários Negativos","users.api.spec.ts","",""
+"Como um usuário do SauceDemo
+  Eu quero fazer login na aplicação
+  Para acessar o catálogo de produtos","407","Login com usuário bloqueado","","2026-02-28","passed","2026-02-28","","","",""
