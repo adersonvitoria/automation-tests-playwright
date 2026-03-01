@@ -95,6 +95,36 @@ cp .env.example .env
 
 > **Importante**: A API Reqres.in requer uma chave de API gratuita. Crie sua conta em [app.reqres.in](https://app.reqres.in) e gere uma key para incluir no arquivo `.env`.
 
+## Configuração do Navegador (Headless vs Visível)
+
+Os testes E2E podem ser executados de duas formas, controladas pelas variáveis no arquivo `.env`:
+
+### Modo Invisível (Headless) — padrão
+
+O navegador executa em segundo plano, sem interface gráfica. Ideal para **CI/CD**, pipelines e execuções rápidas.
+
+```env
+HEADLESS=true
+SLOW_MO=0
+```
+
+### Modo Visível (Headed) — debug e acompanhamento
+
+O navegador Chrome abre na tela e você visualiza cada step sendo executado em tempo real. Ideal para **debug**, demonstrações e acompanhamento visual dos testes.
+
+```env
+HEADLESS=false
+SLOW_MO=50
+```
+
+| Variável   | Descrição | Valores |
+|------------|-----------|---------|
+| `HEADLESS` | Controla se o navegador abre visivelmente | `true` (invisível) / `false` (visível) |
+| `SLOW_MO`  | Delay em ms entre cada ação do Playwright | `0` (sem delay) / `50`-`200` (acompanhar visualmente) |
+| `TIMEOUT`  | Timeout padrão para espera de elementos | `30000` (30 segundos) |
+
+> **Dica:** Para acompanhar os testes visualmente com calma, use `SLOW_MO=150` ou `SLOW_MO=200`. Para debug rápido com navegador aberto, use `SLOW_MO=0` com `HEADLESS=false`.
+
 ## Como Executar os Testes
 
 ### Testes de API
@@ -108,10 +138,19 @@ Executa todos os testes de API utilizando o Playwright Test Runner contra a API 
 ### Testes E2E (Cucumber)
 
 ```bash
+# Execução padrão (com output no terminal)
 npm run test:e2e
+
+# Execução com geração de resultados para Allure Report
+npm run test:e2e:allure
 ```
 
-Executa todos os cenários BDD escritos em Gherkin utilizando Cucumber + Playwright. Os resultados Allure são gerados automaticamente em `allure-results/e2e/`.
+Executa todos os cenários BDD escritos em Gherkin utilizando Cucumber + Playwright.
+
+- `test:e2e` — exibe progresso e resumo no terminal (profile `default`)
+- `test:e2e:allure` — gera resultados no `allure-results/` para o Allure Report (profile `allure`)
+
+> O modo do navegador (visível ou invisível) é controlado pela variável `HEADLESS` no `.env`. Veja a seção [Configuração do Navegador](#configuração-do-navegador-headless-vs-visível).
 
 ### Todos os Testes
 
@@ -243,6 +282,20 @@ O pipeline GitHub Actions (`.github/workflows/ci.yml`) executa automaticamente:
 5. **Resumo** - Tabela consolidada dos resultados
 
 Relatórios são salvos como artefatos por 30 dias. O artefato `allure-report-consolidated` contém o relatório HTML completo.
+
+## Scripts Disponíveis
+
+| Script | Comando | Descrição |
+|--------|---------|-----------|
+| `test:api` | `npm run test:api` | Executa testes de API (Playwright) |
+| `test:e2e` | `npm run test:e2e` | Executa testes E2E com output no terminal |
+| `test:e2e:allure` | `npm run test:e2e:allure` | Executa testes E2E gerando resultados Allure |
+| `test:all` | `npm run test:all` | Executa API + E2E sequencialmente |
+| `allure:generate` | `npm run allure:generate` | Gera relatório Allure HTML |
+| `allure:open` | `npm run allure:open` | Abre relatório Allure no navegador |
+| `allure:serve` | `npm run allure:serve` | Gera e serve relatório Allure temporário |
+| `report:api` | `npm run report:api` | Abre relatório HTML do Playwright |
+| `report:e2e` | `npm run report:e2e` | Gera relatório HTML do Cucumber |
 
 ## Boas Práticas Aplicadas
 

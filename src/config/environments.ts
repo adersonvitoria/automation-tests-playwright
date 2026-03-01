@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export const ENV = {
   API_BASE_URL: process.env.API_BASE_URL || 'https://reqres.in',
   REQRES_API_KEY: process.env.REQRES_API_KEY || '',

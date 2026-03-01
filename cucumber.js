@@ -1,20 +1,32 @@
+const commonConfig = {
+  requireModule: ['tsx'],
+  require: [
+    'src/support/**/*.ts',
+    'tests/e2e/steps/**/*.ts',
+  ],
+  paths: ['tests/e2e/features/**/*.feature'],
+  formatOptions: {
+    snippetInterface: 'async-await',
+  },
+  publishQuiet: true,
+};
+
 module.exports = {
   default: {
-    requireModule: ['tsx'],
-    require: [
-      'src/support/**/*.ts',
-      'tests/e2e/steps/**/*.ts',
-    ],
-    paths: ['tests/e2e/features/**/*.feature'],
+    ...commonConfig,
     format: [
-      'progress-bar',
+      'progress',
+      'summary',
       'json:reports/cucumber/results.json',
       'html:reports/cucumber/report.html',
-      'allure-cucumberjs/reporter',
     ],
-    formatOptions: {
-      snippetInterface: 'async-await',
-    },
-    publishQuiet: true,
+  },
+  allure: {
+    ...commonConfig,
+    format: [
+      'allure-cucumberjs/reporter',
+      'json:reports/cucumber/results.json',
+      'html:reports/cucumber/report.html',
+    ],
   },
 };
