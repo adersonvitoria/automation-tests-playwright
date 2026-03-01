@@ -76,7 +76,18 @@ jobs:
 
       - name: Executar testes E2E
         run: npm run test:e2e:allure
+        env:
+          ALLURE_RESULTS_DIR: ./allure-results
+          HEADLESS: 'true'
         continue-on-error: true
+
+      - name: Verificar resultados Allure E2E
+        if: always()
+        run: |
+          echo "=== Allure Results Directory ==="
+          ls -la allure-results/ 2>/dev/null || echo "Directory allure-results/ not found"
+          echo "=== File count ==="
+          find allure-results/ -type f 2>/dev/null | wc -l || echo "0 files"
 
       - name: Gerar relatório HTML do Cucumber
         if: always()
@@ -99,6 +110,7 @@ jobs:
           name: allure-results-e2e
           path: allure-results/
           retention-days: 30
+          if-no-files-found: warn
 
   allure-report:
     name: Gerar Allure Report Consolidado

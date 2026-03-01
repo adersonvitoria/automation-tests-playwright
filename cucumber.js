@@ -23,6 +23,10 @@ module.exports = {
   },
   allure: {
     ...commonConfig,
+    formatOptions: {
+      ...commonConfig.formatOptions,
+      resultsDir: './allure-results',
+    },
     format: [
       'allure-cucumberjs/reporter',
       'json:reports/cucumber/results.json',
