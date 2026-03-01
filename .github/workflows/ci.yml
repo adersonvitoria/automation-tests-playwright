@@ -75,7 +75,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Executar testes E2E
-        run: npm run test:e2e
+        run: npm run test:e2e:allure
         continue-on-error: true
 
       - name: Gerar relatório HTML do Cucumber
