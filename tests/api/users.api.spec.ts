@@ -29,7 +29,7 @@ test.describe('Users API - GET /api/users', () => {
       });
 
       await allure.step('Validar status code 200', async () => {
-        expect(response.status()).toBe(999); // FORÇANDO FALHA PARA VALIDAR PIPELINE
+        expect(response.status()).toBe(200);
       });
 
       await allure.step('Validar Content-Type application/json', async () => {
