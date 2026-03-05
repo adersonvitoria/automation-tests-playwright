@@ -27,7 +27,7 @@ Then(
   async function (this: CustomWorld) {
     await this.page.waitForURL('**/inventory.html', { timeout: 10_000 });
     const url = await this.inventoryPage.getCurrentUrl();
-    expect(url).toContain('dashboard'); // FORÇANDO FALHA PARA VALIDAR PIPELINE E2E
+    expect(url).toContain('inventory');
   }
 );
 
