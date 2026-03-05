@@ -1,5 +1,12 @@
 import { test, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
+import {
+  UserListResponseSchema,
+  SingleUserResponseSchema,
+  CreatedUserSchema,
+  UpdatedUserSchema,
+  validateSchema,
+} from '../../src/schemas/api-schemas';
 
 test.describe('Users API - GET /api/users', () => {
 
@@ -31,22 +38,10 @@ test.describe('Users API - GET /api/users', () => {
 
       const body = await response.json();
 
-      await allure.step('Validar estrutura de paginação', async () => {
-        expect(body.page).toBe(1);
-        expect(body.per_page).toBeGreaterThan(0);
-        expect(body.total).toBeGreaterThan(0);
-        expect(body.total_pages).toBeGreaterThan(0);
-        expect(body.data).toBeInstanceOf(Array);
-        expect(body.data.length).toBeGreaterThan(0);
-      });
-
-      await allure.step('Validar schema do usuário retornado', async () => {
-        const user = body.data[0];
-        expect(user).toHaveProperty('id');
-        expect(user).toHaveProperty('email');
-        expect(user).toHaveProperty('first_name');
-        expect(user).toHaveProperty('last_name');
-        expect(user).toHaveProperty('avatar');
+      await allure.step('Validar schema completo com Zod (contrato)', async () => {
+        const parsed = validateSchema(UserListResponseSchema, body);
+        expect(parsed.page).toBe(1);
+        expect(parsed.data.length).toBeGreaterThan(0);
       });
     });
 
@@ -102,14 +97,9 @@ test.describe('Users API - GET /api/users', () => {
 
       const body = await response.json();
 
-      await allure.step('Validar dados do usuário retornado', async () => {
-        expect(body.data).toBeDefined();
-        expect(body.data.id).toBe(2);
-        expect(body.data.email).toBeTruthy();
-        expect(body.data.first_name).toBeTruthy();
-        expect(body.data.last_name).toBeTruthy();
-        expect(body.data.avatar).toContain('https://');
-        expect(body.support).toBeDefined();
+      await allure.step('Validar schema completo com Zod (contrato)', async () => {
+        const parsed = validateSchema(SingleUserResponseSchema, body);
+        expect(parsed.data.id).toBe(2);
       });
     });
 
@@ -131,16 +121,10 @@ test.describe('Users API - GET /api/users', () => {
 
       const body = await response.json();
 
-      await allure.step('Validar tipos dos campos do schema', async () => {
-        expect(typeof body.data.id).toBe('number');
-        expect(typeof body.data.email).toBe('string');
-        expect(typeof body.data.first_name).toBe('string');
-        expect(typeof body.data.last_name).toBe('string');
-        expect(typeof body.data.avatar).toBe('string');
-      });
-
-      await allure.step('Validar formato do email com regex', async () => {
-        expect(body.data.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+      await allure.step('Validar tipos e formatos com Zod (contrato)', async () => {
+        const parsed = validateSchema(SingleUserResponseSchema, body);
+        expect(parsed.data.id).toBe(1);
+        expect(parsed.data.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
       });
     });
   });
@@ -223,12 +207,11 @@ test.describe('Users API - POST /api/users', () => {
         expect(response.headers()['content-type']).toContain('application/json');
       });
 
-      await allure.step('Validar dados do usuário criado', async () => {
+      await allure.step('Validar schema do usuário criado com Zod (contrato)', async () => {
         const body = await response.json();
-        expect(body.name).toBe(payload.name);
-        expect(body.job).toBe(payload.job);
-        expect(body.id).toBeTruthy();
-        expect(body.createdAt).toBeTruthy();
+        const parsed = validateSchema(CreatedUserSchema, body);
+        expect(parsed.name).toBe(payload.name);
+        expect(parsed.job).toBe(payload.job);
       });
     });
 
@@ -341,11 +324,11 @@ test.describe('Users API - PUT /api/users', () => {
         expect(response.headers()['content-type']).toContain('application/json');
       });
 
-      await allure.step('Validar dados atualizados no body', async () => {
+      await allure.step('Validar schema de atualização com Zod (contrato)', async () => {
         const body = await response.json();
-        expect(body.name).toBe(payload.name);
-        expect(body.job).toBe(payload.job);
-        expect(body.updatedAt).toBeTruthy();
+        const parsed = validateSchema(UpdatedUserSchema, body);
+        expect(parsed.name).toBe(payload.name);
+        expect(parsed.job).toBe(payload.job);
       });
     });
 

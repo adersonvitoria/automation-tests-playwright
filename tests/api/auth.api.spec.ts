@@ -1,5 +1,12 @@
 import { test, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
+import {
+  RegisterResponseSchema,
+  LoginResponseSchema,
+  ErrorResponseSchema,
+  ResourceListResponseSchema,
+  validateSchema,
+} from '../../src/schemas/api-schemas';
 
 test.describe('Auth API - POST /api/register', () => {
 
@@ -36,11 +43,10 @@ test.describe('Auth API - POST /api/register', () => {
 
       const body = await response.json();
 
-      await allure.step('Validar presença e tipo do id e token', async () => {
-        expect(body.id).toBeTruthy();
-        expect(body.token).toBeTruthy();
-        expect(typeof body.id).toBe('number');
-        expect(typeof body.token).toBe('string');
+      await allure.step('Validar schema de registro com Zod (contrato)', async () => {
+        const parsed = validateSchema(RegisterResponseSchema, body);
+        expect(parsed.id).toBeGreaterThan(0);
+        expect(parsed.token.length).toBeGreaterThan(0);
       });
     });
   });
@@ -69,9 +75,10 @@ test.describe('Auth API - POST /api/register', () => {
         expect(response.status()).toBe(400);
       });
 
-      await allure.step('Validar mensagem de erro "Missing password"', async () => {
+      await allure.step('Validar schema de erro com Zod e mensagem', async () => {
         const body = await response.json();
-        expect(body.error).toBe('Missing password');
+        const parsed = validateSchema(ErrorResponseSchema, body);
+        expect(parsed.error).toBe('Missing password');
       });
     });
 
@@ -93,10 +100,11 @@ test.describe('Auth API - POST /api/register', () => {
         return await request.post('/api/register', { data: payload });
       });
 
-      await allure.step('Validar rejeição com status 400', async () => {
+      await allure.step('Validar schema de erro com Zod e mensagem', async () => {
         expect(response.status()).toBe(400);
         const body = await response.json();
-        expect(body.error).toBe('Missing email or username');
+        const parsed = validateSchema(ErrorResponseSchema, body);
+        expect(parsed.error).toBe('Missing email or username');
       });
     });
 
@@ -208,11 +216,10 @@ test.describe('Auth API - POST /api/login', () => {
         expect(response.headers()['content-type']).toContain('application/json');
       });
 
-      await allure.step('Validar token no body da resposta', async () => {
+      await allure.step('Validar schema de login com Zod (contrato)', async () => {
         const body = await response.json();
-        expect(body.token).toBeTruthy();
-        expect(typeof body.token).toBe('string');
-        expect(body.token.length).toBeGreaterThan(0);
+        const parsed = validateSchema(LoginResponseSchema, body);
+        expect(parsed.token.length).toBeGreaterThan(0);
       });
     });
   });
@@ -433,18 +440,9 @@ test.describe('Resources API - GET /api/unknown', () => {
 
     const body = await response.json();
 
-    await allure.step('Validar estrutura do array de recursos', async () => {
-      expect(body.data).toBeInstanceOf(Array);
-      expect(body.data.length).toBeGreaterThan(0);
-    });
-
-    await allure.step('Validar schema do recurso', async () => {
-      const resource = body.data[0];
-      expect(resource).toHaveProperty('id');
-      expect(resource).toHaveProperty('name');
-      expect(resource).toHaveProperty('year');
-      expect(resource).toHaveProperty('color');
-      expect(resource).toHaveProperty('pantone_value');
+    await allure.step('Validar schema completo de recursos com Zod (contrato)', async () => {
+      const parsed = validateSchema(ResourceListResponseSchema, body);
+      expect(parsed.data.length).toBeGreaterThan(0);
     });
   });
 

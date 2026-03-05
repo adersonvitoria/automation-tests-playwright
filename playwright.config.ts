@@ -1,12 +1,10 @@
 import { defineConfig } from '@playwright/test';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+import { ENV } from './src/config/environments';
 
 export default defineConfig({
   testDir: './tests/api',
   testMatch: '**/*.api.spec.ts',
-  timeout: 30_000,
+  timeout: ENV.TIMEOUT,
   retries: 1,
   workers: 1,
   fullyParallel: false,
@@ -21,7 +19,8 @@ export default defineConfig({
       suiteTitle: true,
       environmentInfo: {
         Framework: 'Playwright',
-        'API Base URL': 'https://reqres.in',
+        Profile: ENV.PROFILE,
+        'API Base URL': ENV.API_BASE_URL,
         'Node.js': process.version,
         OS: process.platform,
       },
@@ -29,11 +28,11 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://reqres.in',
+    baseURL: ENV.API_BASE_URL,
     extraHTTPHeaders: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'x-api-key': process.env.REQRES_API_KEY || '',
+      'x-api-key': ENV.REQRES_API_KEY,
     },
   },
 
