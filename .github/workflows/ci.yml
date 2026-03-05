@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   REQRES_API_KEY: reqres_7b4880206ffa4e6b8429a7291998c7c5
