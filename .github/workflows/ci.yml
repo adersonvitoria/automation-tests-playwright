@@ -8,8 +8,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 env:
   REQRES_API_KEY: reqres_7b4880206ffa4e6b8429a7291998c7c5
@@ -131,6 +136,8 @@ jobs:
           mkdir -p allure-results-merged
           cp -r allure-results/api/* allure-results-merged/ 2>/dev/null || true
           cp -r allure-results/e2e/* allure-results-merged/ 2>/dev/null || true
+          echo "Arquivos consolidados:"
+          ls -la allure-results-merged/ || echo "Nenhum resultado encontrado"
 
       - name: Instalar Allure CLI
         run: |
@@ -140,7 +147,7 @@ jobs:
       - name: Gerar Allure Report
         run: allure generate allure-results-merged -o allure-report --clean
 
-      - name: Upload Allure Report
+      - name: Upload Allure Report (artifact)
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -148,18 +155,31 @@ jobs:
           path: allure-report/
           retention-days: 30
 
-      - name: Publicar Allure Report no GitHub Pages
+      - name: Upload Pages artifact
         if: always()
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
-          destination_dir: allure-report
+          path: allure-report/
+
+  deploy-report:
+    name: Deploy Allure no GitHub Pages
+    runs-on: ubuntu-latest
+    needs: allure-report
+    if: always()
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   summary:
     name: Resumo dos Testes
     runs-on: ubuntu-latest
-    needs: [api-tests, e2e-tests, allure-report]
+    needs: [api-tests, e2e-tests, allure-report, deploy-report]
     if: always()
 
     steps:
@@ -172,5 +192,6 @@ jobs:
           echo "| Testes de API | ${{ needs.api-tests.result }} | Playwright + Allure |" >> $GITHUB_STEP_SUMMARY
           echo "| Testes E2E | ${{ needs.e2e-tests.result }} | Cucumber + Allure |" >> $GITHUB_STEP_SUMMARY
           echo "| Allure Report | ${{ needs.allure-report.result }} | Consolidado |" >> $GITHUB_STEP_SUMMARY
+          echo "| Deploy Pages | ${{ needs.deploy-report.result }} | GitHub Pages |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> **Allure Report:** https://adersonvitoria.github.io/automation-tests-playwright/allure-report/" >> $GITHUB_STEP_SUMMARY
+          echo "> **Allure Report:** https://adersonvitoria.github.io/automation-tests-playwright/" >> $GITHUB_STEP_SUMMARY
